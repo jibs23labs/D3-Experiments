@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<script charset="utf-8" type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+		<!-- <script charset="utf-8" type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+		<!-- <script charset="utf-8" type="text/css" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script> -->
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+	</head>
+
+	<body>
+
+
+<div class="span12" id="content">
+	<div class="hero-unit">
+		<h1>Data List</h1>
+		<p>
+		This example uses D3.js to create elements in a list, and add/remove them on the fly.
+		</p>
+		<p><a id="add" class="btn btn-large">Add &raquo;</a>&nbsp;&nbsp;<a class="btn btn-large" id="remove">Remove &raquo;</a></p>
+		<div id="charts"></div>
+		<div id="charts1"></div>
+</div>
+
+</body>
+
+
+<script type="text/javascript">
+// Data Set Values 1
+{
+					var data = [1, 2, 3, 4, 5];
+				var list = d3.select("#charts")
+								.append('ul');
+				function update()
+				{
+					var items = list.selectAll('li').data(data);
+					items.enter()
+						 .append('li')
+						 .text(function(d) {return d;});
+					items.exit().remove();
+				}
+			update();
+}
+ // Data Set Values 2
+{
+			var data = [10, 20, 30, 40, 50],k = 10;
+			var list = d3.select("#charts1")
+							.append('ul');
+			function update()
+			{
+				var items = list.selectAll('li').data(data);
+				items.enter()
+					 .append('li')
+					 .text(function(d) {return d*k++;});
+				items.exit().remove();
+			}
+			update();
+}
+// To add button to add and remove
+
+	d3.select('#add')
+		.on('click', function(){
+			data.push(i++);
+			update();
+		});
+	d3.select('#remove')
+		.on('click', function(){
+			if(i>1)
+				{
+					data.pop();
+					i--;
+				}
+			update();
+	});
+
+
+</script>
+</html>

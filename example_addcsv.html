@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<script charset="utf-8" type="text/javascript" src="d3/d3.js"></script>
+			<script charset="utf-8" type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script charset="utf-8" type="text/javascript" src="jquery/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/	bootstrap-theme.css">
+
+
+
+
+	</head>
+
+	<body>
+
+
+
+	<div class="span12">
+		<div class="hero-unit">
+			<h1>Load CSV</h1>
+			<p>
+			This example loads data from a csv. It then creates a simple tag-list for my blog.
+			</p>
+			<div id="charts"></div>
+			<p>The csv is <a href="csv/links.csv" target="_blank">here</a></p>
+	</div>
+
+</body>
+
+
+<script type="text/javascript">
+
+	d3.select('#charts')
+	  .append('a')
+	  .attr('class','btn btn-default btn-large')
+	  .attr('id','tagload')
+	  .text('Load tags.csv')
+	  .on('click', function(){
+	d3.csv("csv/links.csv", function(d){
+			d3.select("#charts")
+				.append('ul')
+				.attr("class", "nav nav-pills")
+				.selectAll('li')
+				.data(d)
+				.enter()
+				.append('li')
+				.attr('class', 'active')
+				.append('a')
+				.text(function(d) {return "#" + d.tag;})
+				.attr("href", function(d){return "http://www.designserif.com/tagged/" + d.tag;})
+				.attr("target", function(d){return d.target;});
+		});
+		d3.select('#tagload').remove();
+	  });
+</script>
+
+
+</html>
